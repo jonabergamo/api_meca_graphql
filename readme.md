@@ -33,7 +33,7 @@ As queries em GraphQL são usadas para ler ou buscar dados. Elas são estruturad
 
 #### Exemplo de Query
 
-```json
+```graphql
 query GetUser($id: Int) {
   user(id: $id) {
     id
@@ -55,7 +55,7 @@ As mutations são usadas para criar, atualizar ou deletar dados. Elas são semel
 
 #### Exemplo de Mutation
 
-```json
+```graphql
 mutation CreateUser($email: String!, $username: String!) {
   createUser(email: $email, username: $username) {
     user {
