@@ -1,6 +1,6 @@
 import graphene
 from graphene_django import DjangoObjectType
-from api.models import IncubatorDevice, IncubatorSetting, User
+from api.models import IncubatorDevice, IncubatorSetting, CustomUser
 from api.types import IncubatorDeviceType
 
 class UpdateIncubatorDevice(graphene.Mutation):
@@ -26,7 +26,7 @@ class UpdateIncubatorDevice(graphene.Mutation):
             return None
 
         if user_id is not None:
-            device.user = User.objects.get(pk=user_id)
+            device.user = CustomUser.objects.get(pk=user_id)
         if current_setting_id is not None:
             device.current_setting = IncubatorSetting.objects.get(pk=current_setting_id)
         if is_on is not None:

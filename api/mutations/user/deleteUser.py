@@ -1,5 +1,5 @@
 import graphene
-from django.contrib.auth.models import User
+from api.models import CustomUser
 
 class DeleteUser(graphene.Mutation):
     class Arguments:
@@ -14,9 +14,9 @@ class DeleteUser(graphene.Mutation):
         if not user.is_authenticated:
             raise Exception("Authentication credentials were not provided")
         try:
-            user = User.objects.get(pk=id)
+            user = CustomUser.objects.get(pk=id)
             user.delete()
             return DeleteUser(success=True)
-        except User.DoesNotExist:
+        except CustomUser.DoesNotExist:
             # Retorna False se o usuário não for encontrado
             return DeleteUser(success=False)

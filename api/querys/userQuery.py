@@ -1,5 +1,5 @@
 import graphene
-from api.models import User
+from api.models import CustomUser
 from api.types import UserType
 
 class UserQuery(graphene.ObjectType):
@@ -10,14 +10,14 @@ class UserQuery(graphene.ObjectType):
         user = info.context.user
         if not user.is_authenticated:
             raise Exception("Authentication credentials were not provided")
-        return User.objects.all()
+        return CustomUser.objects.all()
 
 
     def resolve_users(self, info):
         user = info.context.user
         if not user.is_authenticated:
             raise Exception("Authentication credentials were not provided")
-        return User.objects.all()
+        return CustomUser.objects.all()
     
     def resolve_user(self, info, id):
         user = info.context.user
@@ -25,5 +25,5 @@ class UserQuery(graphene.ObjectType):
             raise Exception("Authentication credentials were not provided")
         try:
             return User.objects.get(pk=id)
-        except User.DoesNotExist:
+        except CustomUser.DoesNotExist:
             return None

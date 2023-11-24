@@ -1,6 +1,6 @@
 import graphene
 from graphene_django import DjangoObjectType
-from api.models import User, IncubatorSetting
+from api.models import CustomUser, IncubatorSetting
 from api.querys.incubatorDeviceQuery import IncubatorDeviceType
 from api.types import IncubatorSettingType
 from datetime import timedelta
@@ -23,7 +23,7 @@ class CreateIncubatorSetting(graphene.Mutation):
         user = info.context.user
         if not user.is_authenticated:
             raise Exception("Authentication credentials were not provided")
-        user = User.objects.get(pk=user_id)
+        user = CustomUser.objects.get(pk=user_id)
         incubator_setting = IncubatorSetting(
             name=name,
             temperature=temperature,

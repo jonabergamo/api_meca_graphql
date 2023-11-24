@@ -1,5 +1,5 @@
 from django.db import models
-from .user import User
+from .user import CustomUser
 
 
 class IncubatorSetting(models.Model):
@@ -7,7 +7,7 @@ class IncubatorSetting(models.Model):
     temperature = models.FloatField()
     humidity = models.FloatField()
     incubation_duration = models.DurationField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

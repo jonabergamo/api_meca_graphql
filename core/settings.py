@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-38ywcfy+)7%0^0-6010%m5*sn=bw)p@gmivu0ox^mchg!mv(*t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['aguinaldomendes5.pythonanywhere.com']
+ALLOWED_HOSTS = ['aguinaldomendes5.pythonanywhere.com', '127.0.0.1']
 
 
 # Application definition
@@ -58,6 +58,7 @@ GRAPHQL_JWT = {
 AUTHENTICATION_BACKENDS = [
     "graphql_jwt.backends.JSONWebTokenBackend",
     "django.contrib.auth.backends.ModelBackend",
+    'api.authenticate.EmailBackend'
 ]
 
 MIDDLEWARE = [

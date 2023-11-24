@@ -1,5 +1,5 @@
 import graphene
-from django.contrib.auth.models import User
+from api.models import CustomUser
 from api.types import UserType
 
 class UpdateUser(graphene.Mutation):
@@ -30,5 +30,5 @@ class UpdateUser(graphene.Mutation):
             user.save()
             return UpdateUser(user=user)
 
-        except User.DoesNotExist:
+        except CustomUser.DoesNotExist:
             return None

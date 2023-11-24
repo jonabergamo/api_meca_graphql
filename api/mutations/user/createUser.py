@@ -1,12 +1,11 @@
 import graphene
 from graphene_django import DjangoObjectType
-from django.contrib.auth.models import User
+from api.models import CustomUser
 from api.types import UserType
 
 
 class CreateUser(graphene.Mutation):
     class Arguments:
-        username = graphene.String(required=True)
         email = graphene.String(required=True)
         password = graphene.String(required=True)
 
@@ -14,6 +13,6 @@ class CreateUser(graphene.Mutation):
     user = graphene.Field(UserType)  # UserType é um DjangoObjectType que você precisa definir para o modelo User
 
     @staticmethod
-    def mutate(root, info, username, email, password):
-        user = User.objects.create_user(username=username, email=email, password=password)
+    def mutate(root, info, email, password):
+        user = CustomUser.objects.create_user(email=email, password=password)
         return CreateUser(user=user)
