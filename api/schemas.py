@@ -14,3 +14,5 @@ class Mutation(graphene.ObjectType):
     update_incubator_device = UpdateIncubatorDevice.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
+
+print(str(schema))
