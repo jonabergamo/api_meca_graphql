@@ -14,6 +14,9 @@ class UpdateUser(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, id, username=None, email=None, password=None):
+        user = info.context.user
+        if not user.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
         try:
             user = User.objects.get(pk=id)
 

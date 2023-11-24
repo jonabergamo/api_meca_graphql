@@ -8,11 +8,15 @@ class IncubatorDeviceQuery(graphene.ObjectType):
     incubator_device = graphene.Field(IncubatorDeviceType, unique_id=graphene.String())
 
     def resolve_all_incubator_devices(self, info):
-        # Retorna todos os dispositivos
+        user = info.context.user
+        if not user.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
         return IncubatorDevice.objects.all()
 
     def resolve_incubator_device(self, info, unique_id):
-        # Retorna um dispositivo específico pelo seu unique_id
+        user = info.context.user
+        if not user.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
         try:
             return IncubatorDevice.objects.get(unique_id=unique_id)
         except IncubatorDevice.DoesNotExist:

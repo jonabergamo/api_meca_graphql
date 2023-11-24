@@ -17,6 +17,9 @@ class UpdateIncubatorDevice(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, unique_id, user_id=None, current_setting_id=None, is_on=None, humidity_sensor=None, temperature_sensor=None):
+        user = info.context.user
+        if not user.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
         try:
             device = IncubatorDevice.objects.get(unique_id=unique_id)
         except IncubatorDevice.DoesNotExist:

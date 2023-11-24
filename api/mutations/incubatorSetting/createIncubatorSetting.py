@@ -20,6 +20,9 @@ class CreateIncubatorSetting(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, name, temperature, humidity, incubation_duration, user_id):
+        user = info.context.user
+        if not user.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
         user = User.objects.get(pk=user_id)
         incubator_setting = IncubatorSetting(
             name=name,

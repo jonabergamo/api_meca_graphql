@@ -39,11 +39,26 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api',
     'graphene_django',
+    'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
 ]
 
 GRAPHENE = {
-    "SCHEMA": "core.schema.schema"
+    "SCHEMA": "core.schema.schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
+
 }
+
+GRAPHQL_JWT = {
+    'JWT_PAYLOAD_HANDLER': 'api.utils.my_jwt_payload',
+    # outras configurações do JWT...
+}
+
+AUTHENTICATION_BACKENDS = [
+    "graphql_jwt.backends.JSONWebTokenBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
 ]
 
 ROOT_URLCONF = 'core.urls'
