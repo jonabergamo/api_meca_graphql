@@ -1,5 +1,3 @@
-from .createIncubatorDevice import CreateIncubatorDevice
-from .createUser import CreateUser
-from .createIncubatorSetting import CreateIncubatorSetting
-from .updateIncubatorSetting import UpdateIncubatorSetting
-from .updateIncubatorDevice import UpdateIncubatorDevice
+from .incubatorDevice import CreateIncubatorDevice, UpdateIncubatorDevice
+from .user import CreateUser, UpdateUser, DeleteUser
+from .incubatorSetting import CreateIncubatorSetting, UpdateIncubatorSetting, DeleteIncubatorSetting

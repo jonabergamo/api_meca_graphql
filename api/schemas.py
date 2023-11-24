@@ -1,6 +1,6 @@
 import graphene
 from api.querys import UserQuery, IncubatorDeviceQuery, IncubatorSettingQuery
-from api.mutations import CreateIncubatorDevice, CreateUser, CreateIncubatorSetting, UpdateIncubatorSetting, UpdateIncubatorDevice
+from api.mutations import CreateIncubatorDevice, CreateUser, CreateIncubatorSetting, UpdateIncubatorSetting, UpdateIncubatorDevice, DeleteIncubatorSetting, DeleteUser, UpdateUser
 
 
 class Query(UserQuery,IncubatorSettingQuery, IncubatorDeviceQuery, graphene.ObjectType ):
@@ -8,11 +8,16 @@ class Query(UserQuery,IncubatorSettingQuery, IncubatorDeviceQuery, graphene.Obje
 
 class Mutation(graphene.ObjectType):
     create_incubator_device = CreateIncubatorDevice.Field()
-    create_user = CreateUser.Field()
-    create_incubator_setting = CreateIncubatorSetting.Field()
-    update_incubator_setting = UpdateIncubatorSetting.Field()
     update_incubator_device = UpdateIncubatorDevice.Field()
 
-schema = graphene.Schema(query=Query, mutation=Mutation)
+    create_user = CreateUser.Field()
+    delete_user = DeleteUser.Field()
+    update_user = UpdateUser.Field()
+    
+    create_incubator_setting = CreateIncubatorSetting.Field()
+    update_incubator_setting = UpdateIncubatorSetting.Field()
+    delete_incubator_setting = DeleteIncubatorSetting.Field()
+    
+    
 
-print(str(schema))
+schema = graphene.Schema(query=Query, mutation=Mutation)
