@@ -78,8 +78,6 @@ GraphiQL é uma ferramenta de interface gráfica integrada para explorar e testa
 
 Primeiro, você precisa acessar o GraphiQL. Geralmente, ele é disponibilizado em um endpoint específico da sua API GraphQL.
 
-![Imagem 1: Tela de boas-vindas do GraphiQL](url_da_imagem_1)
-
 ## Passo 2: Familiarizando-se com a Interface
 
 A interface do GraphiQL é dividida em várias seções:
