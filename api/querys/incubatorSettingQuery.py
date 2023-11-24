@@ -7,11 +7,15 @@ class IncubatorSettingQuery(graphene.ObjectType):
     incubator_setting = graphene.Field(IncubatorSettingType, id=graphene.Int())
 
     def resolve_all_incubator_settings(self, info):
-        # Retorna todas as configurações de incubadora
+        user = info.context.user
+        if not user.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
         return IncubatorSetting.objects.all()
 
     def resolve_incubator_setting(self, info, id):
-        # Retorna uma configuração específica pelo seu ID
+        user = info.context.user
+        if not user.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
         try:
             return IncubatorSetting.objects.get(pk=id)
         except IncubatorSetting.DoesNotExist:

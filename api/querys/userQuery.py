@@ -24,7 +24,9 @@ class UserQuery(graphene.ObjectType):
         return User.objects.all()
     
     def resolve_user(self, info, id):
-        # Retorna uma configuração específica pelo seu ID
+        user = info.context.user
+        if not user.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
         try:
             return User.objects.get(pk=id)
         except User.DoesNotExist:
