@@ -1,5 +1,56 @@
 # Documentação da API GraphQL para o Sistema de Gestão de Incubadoras
 
+# Configurando um Ambiente de Desenvolvimento Python com Django
+
+Este guia passo a passo mostra como configurar um ambiente de desenvolvimento Python usando ambientes virtuais, instalar dependências, executar migrações e iniciar um servidor Django.
+
+## Pré-requisitos
+
+- Python instalado
+- pip (gerenciador de pacotes Python)
+- virtualenv (opcional, mas recomendado para criar ambientes virtuais)
+
+## Passo 1: Criar um Ambiente Virtual
+
+Primeiro, crie um ambiente virtual para isolar as dependências do projeto.
+
+```bash
+# Criar um ambiente virtual chamado 'env'
+python3 -m venv env
+```
+## Passo 2: Ativar o Ambiente Virtual
+
+Após criar o ambiente, você precisa ativá-lo.
+````bash
+# Ativar o ambiente virtual
+env/bin/activate
+````
+## Passo 3: Instalar Dependências
+
+Instale todas as dependências necessárias listadas no arquivo `requirements.txt`.
+````bash
+# Instalar dependências usando pip 
+pip install -r requirements.txt
+````
+## Passo 4: Executar Migrações
+
+Antes de iniciar o servidor, certifique-se de aplicar todas as migrações do Django.
+```bash
+# Executar migrações 
+python manage.py migrate
+```
+
+## Passo 5: Iniciar o Servidor Django
+
+Finalmente, inicie o servidor Django.
+
+```bash
+# Iniciar o servidor Django
+python manage.py runserver
+```
+Agora o servidor Django deve estar rodando e acessível localmente na porta 8000 ([http://127.0.0.1:8000/](http://127.0.0.1:8000/)). Lembre-se de manter o ambiente virtual ativado enquanto trabalha no projeto.
+
+
 # Guia de Requisições em GraphQL
 
 GraphQL é uma linguagem de consulta para APIs que oferece uma maneira mais eficiente, poderosa e flexível de trabalhar com dados. Diferentemente das APIs REST, que usam diferentes endpoints para diferentes tipos de requisições, uma API GraphQL expõe um único endpoint e usa a estrutura da consulta para determinar o que é retornado.
