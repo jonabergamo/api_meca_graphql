@@ -1,7 +1,8 @@
 import graphene
 from api.querys import UserQuery, IncubatorDeviceQuery, IncubatorSettingQuery
-from api.mutations import CreateIncubatorDevice, CreateUser, CreateIncubatorSetting, UpdateIncubatorSetting, UpdateIncubatorDevice, DeleteIncubatorSetting, DeleteUser, UpdateUser
-
+from api.mutations import CreateIncubatorDevice, CreateUser, CreateIncubatorSetting, UpdateIncubatorSetting, UpdateIncubatorDevice, DeleteIncubatorSetting, DeleteUser, UpdateUser, ObtainJSONWebToken
+import graphql_jwt
+from api.types import UserType
 
 class Query(UserQuery,IncubatorSettingQuery, IncubatorDeviceQuery, graphene.ObjectType ):
     pass
@@ -18,6 +19,8 @@ class Mutation(graphene.ObjectType):
     update_incubator_setting = UpdateIncubatorSetting.Field()
     delete_incubator_setting = DeleteIncubatorSetting.Field()
     
-    
+    token_auth = ObtainJSONWebToken.Field()
+    verify_token = graphql_jwt.Verify.Field()
+    refresh_token = graphql_jwt.Refresh.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
