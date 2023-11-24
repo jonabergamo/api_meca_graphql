@@ -6,10 +6,6 @@ class UserQuery(graphene.ObjectType):
     users = graphene.List(UserType)
     user = graphene.Field(UserType, id=graphene.Int())
 
-
-
-
-    
     def resolve_all_users(self, info):
         user = info.context.user
         if not user.is_authenticated:

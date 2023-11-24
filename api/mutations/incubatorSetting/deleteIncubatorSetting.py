@@ -12,6 +12,9 @@ class DeleteIncubatorSetting(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, id):
+        user = info.context.user
+        if not user.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
         try:
             incubator_setting = IncubatorSetting.objects.get(pk=id)
             incubator_setting.delete()

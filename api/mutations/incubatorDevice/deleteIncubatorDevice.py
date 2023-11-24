@@ -10,6 +10,9 @@ class DeleteIncubatorDevice(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, unique_id):
+        user = info.context.user
+        if not user.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
         try:
             device = IncubatorDevice.objects.get(unique_id=unique_id)
             device.delete()
