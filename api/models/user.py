@@ -34,7 +34,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(('email address'), max_length=255, unique=True)
     is_staff = models.BooleanField(('staff status'), default=False, help_text=('Designates whether the user can log into this admin site.'))
     is_active = models.BooleanField(('active'), default=True, help_text=('Designates whether this user should be treated as active. Unselect this instead of deleting accounts.'))
-    
+    base64_image = models.TextField('Imagem Base64', blank=True, null=True)
+
     date_joined = models.DateTimeField(('date joined'), default=timezone.now)
     is_trusty = models.BooleanField(('trusty'), default=False, help_text=('Designates whether this user has confirmed his account.'))
     
