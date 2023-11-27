@@ -1,5 +1,5 @@
 import graphene
-from django.contrib.auth.models import User
+from api.models import User
 from api.types import UserType
 
 class UpdateUser(graphene.Mutation):
