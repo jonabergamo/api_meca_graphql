@@ -1,5 +1,5 @@
 import graphene
-from api.models import CustomUser
+from api.models import User
 from api.types import UserType
 
 class UpdateUser(graphene.Mutation):
@@ -30,5 +30,5 @@ class UpdateUser(graphene.Mutation):
             user.save()
             return UpdateUser(user=user)
 
-        except CustomUser.DoesNotExist:
+        except User.DoesNotExist:
             return None

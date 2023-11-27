@@ -1,6 +1,6 @@
 import graphene
 from graphene_django import DjangoObjectType
-from api.models import IncubatorDevice, CustomUser
+from api.models import IncubatorDevice, User
 from api.querys.incubatorDeviceQuery import IncubatorDeviceType
 # Importe qualquer outro modelo necessário
 
@@ -16,7 +16,7 @@ class CreateIncubatorDevice(graphene.Mutation):
 
     @staticmethod
     def mutate(root, info, user_id, humidity_sensor, temperature_sensor):
-        user = CustomUser.objects.get(pk=user_id)
+        user = User.objects.get(pk=user_id)
         user = info.context.user
         if not user.is_authenticated:
             raise Exception("Authentication credentials were not provided")

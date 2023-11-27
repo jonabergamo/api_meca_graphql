@@ -1,3 +1,3 @@
 from .incubatorSetting import IncubatorSetting
-from .user import CustomUser
+from .user import User
 from .incubatorDevice import IncubatorDevice

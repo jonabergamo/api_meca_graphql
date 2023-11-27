@@ -20,13 +20,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-38ywcfy+)7%0^0-6010%m5*sn=bw)p@gmivu0ox^mchg!mv(*t'
+SECRET_KEY = 'teste'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['aguinaldomendes5.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['aguinaldomendes5.pythonanywhere.com', '127.0.0.1', '10.109.25.87']
 
+AUTH_USER_MODEL = "api.User"
+
+CORS_ALLOWED_ORIGINS = [
+    "http://10.109.25.87:8081",  # Substitua pelo domínio do seu frontend em produção
+]
 
 # Application definition
 
@@ -40,6 +45,8 @@ INSTALLED_APPS = [
     'api',
     'graphene_django',
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
+    'corsheaders',
+
 ]
 
 GRAPHENE = {
@@ -56,12 +63,13 @@ GRAPHQL_JWT = {
 }
 
 AUTHENTICATION_BACKENDS = [
+    'api.authenticate.EmailAuthBackend',
     "graphql_jwt.backends.JSONWebTokenBackend",
-    "django.contrib.auth.backends.ModelBackend",
-    'api.authenticate.EmailBackend'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -126,7 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
