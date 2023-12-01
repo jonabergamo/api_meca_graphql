@@ -2,6 +2,7 @@ import graphene
 from api.types import IncubatorSettingType
 from api.models import IncubatorSetting
 
+
 class IncubatorSettingQuery(graphene.ObjectType):
     all_incubator_settings = graphene.List(IncubatorSettingType)
     incubator_setting = graphene.Field(IncubatorSettingType, id=graphene.Int())
@@ -20,3 +21,4 @@ class IncubatorSettingQuery(graphene.ObjectType):
             return IncubatorSetting.objects.get(pk=id)
         except IncubatorSetting.DoesNotExist:
             return None
+

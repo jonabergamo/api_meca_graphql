@@ -12,7 +12,7 @@ class CreateIncubatorSetting(graphene.Mutation):
         name = graphene.String(required=True)
         temperature = graphene.Float(required=True)
         humidity = graphene.Float(required=True)
-        incubation_duration = graphene.Int(required=True)  # Supondo que seja um valor inteiro de dias
+        incubation_duration = graphene.Float(required=True)  # Supondo que seja um valor inteiro de dias
         user_id = graphene.Int(required=True)
 
     # O tipo de retorno da mutação
@@ -28,7 +28,7 @@ class CreateIncubatorSetting(graphene.Mutation):
             name=name,
             temperature=temperature,
             humidity=humidity,
-            incubation_duration=timedelta(days=incubation_duration),  # Convertendo para timedelta
+            incubation_duration=incubation_duration,  # Convertendo para timedelta
             user=user
         )
         incubator_setting.save()

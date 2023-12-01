@@ -25,12 +25,12 @@ SECRET_KEY = 'teste'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['aguinaldomendes5.pythonanywhere.com', '127.0.0.1', '10.109.25.87']
+ALLOWED_HOSTS = ['aguinaldomendes5.pythonanywhere.com', '127.0.0.1', '192.168.81.92', '172.28.208.1', '10.109.3.8']
 
 AUTH_USER_MODEL = "api.User"
 
 CORS_ALLOWED_ORIGINS = [
-    "http://10.109.25.87:8081",  # Substitua pelo domínio do seu frontend em produção
+    "http://10.109.3.8:8081",  # Substitua pelo domínio do seu frontend em produção
 ]
 
 # Application definition
