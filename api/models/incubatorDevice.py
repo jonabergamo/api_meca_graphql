@@ -16,11 +16,11 @@ class IncubatorDevice(models.Model):
     def __str__(self):
         return f"{self.user.username}'s Incubator Device"
 
-    def turn_on(self):
-        self.is_on = True
-        self.start_time = timezone.now()
-        self.save()
-
-    def turn_off(self):
-        self.is_on = False
-        self.save()
+    def save(self, *args, **kwargs):
+        if self.is_on and self.start_time is None:
+            # Atualizar start_time apenas se o dispositivo está sendo ligado e start_time ainda não foi definido
+            self.start_time = timezone.now()
+        elif not self.is_on:
+            # Definir start_time como None quando o dispositivo for desligado
+            self.start_time = None
+        super().save(*args, **kwargs)
