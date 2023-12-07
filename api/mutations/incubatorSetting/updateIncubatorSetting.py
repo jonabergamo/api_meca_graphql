@@ -31,7 +31,7 @@ class UpdateIncubatorSetting(graphene.Mutation):
         if humidity is not None:
             incubator_setting.humidity = humidity
         if incubation_duration is not None:
-            incubator_setting.incubation_duration = timedelta(days=incubation_duration)
+            incubator_setting.incubation_duration = incubation_duration
 
         incubator_setting.save()
         return UpdateIncubatorSetting(incubator_setting=incubator_setting)

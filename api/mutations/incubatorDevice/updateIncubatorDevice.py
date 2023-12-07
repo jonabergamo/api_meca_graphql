@@ -10,13 +10,14 @@ class UpdateIncubatorDevice(graphene.Mutation):
         current_setting_id = graphene.Int()
         is_on = graphene.Boolean()
         humidity_sensor = graphene.String()
+        name = graphene.String()
         temperature_sensor = graphene.String()
 
     # O tipo de retorno da mutação
     incubator_device = graphene.Field(IncubatorDeviceType)
 
     @staticmethod
-    def mutate(root, info, unique_id, user_id=None, current_setting_id=None, is_on=None, humidity_sensor=None, temperature_sensor=None):
+    def mutate(root, info, unique_id, user_id=None, current_setting_id=None, is_on=None, humidity_sensor=None, temperature_sensor=None, name=None):
         user = info.context.user
         if not user.is_authenticated:
             raise Exception("Authentication credentials were not provided")
@@ -35,6 +36,8 @@ class UpdateIncubatorDevice(graphene.Mutation):
             device.humidity_sensor = humidity_sensor
         if temperature_sensor is not None:
             device.temperature_sensor = temperature_sensor
+        if name is not None:
+            device.name = name  
 
         device.save()
         return UpdateIncubatorDevice(incubator_device=device)

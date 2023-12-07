@@ -15,18 +15,24 @@ class CreateIncubatorDevice(graphene.Mutation):
     incubator_device = graphene.Field(IncubatorDeviceType)
 
     @staticmethod
-    def mutate(root, info, user_id, name, current_setting):
+    def mutate(root, info, user_id, name, current_setting=None):
         user = User.objects.get(pk=user_id)
         user = info.context.user
         if not user.is_authenticated:
             raise Exception("Authentication credentials were not provided")
-        incubator_set = IncubatorSetting.objects.get(id=current_setting)
+
+        # Verifica se current_setting foi fornecido
+        if current_setting is not None:
+            incubator_set = IncubatorSetting.objects.get(id=current_setting)
+        else:
+            incubator_set = None
+
         incubator_device = IncubatorDevice(
             user=user,
             name=name,
             current_setting=incubator_set
         )
-    
+
         incubator_device.save()
 
         return CreateIncubatorDevice(incubator_device=incubator_device)
