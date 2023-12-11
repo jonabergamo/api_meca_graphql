@@ -12,6 +12,7 @@ class IncubatorDevice(models.Model):
     humidity_sensor = models.FloatField(max_length=100, default=0)
     temperature_sensor = models.FloatField(max_length=100, default=0)
     start_time = models.DateTimeField(null=True, blank=True)
+    last_completion_data = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.user.username}'s Incubator Device"

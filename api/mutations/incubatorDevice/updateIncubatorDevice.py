@@ -2,6 +2,7 @@ import graphene
 from graphene_django import DjangoObjectType
 from api.models import IncubatorDevice, IncubatorSetting, User
 from api.types import IncubatorDeviceType
+from datetime import datetime, timezone
 
 class UpdateIncubatorDevice(graphene.Mutation):
     class Arguments:
@@ -38,6 +39,16 @@ class UpdateIncubatorDevice(graphene.Mutation):
             device.temperature_sensor = temperature_sensor
         if name is not None:
             device.name = name  
+            
+        if device.is_on and device.start_time and device.current_setting:
+            elapsed_time = datetime.now(timezone.utc) - device.start_time
+            incubation_duration = device.current_setting.incubation_duration
+            incubation_completed = elapsed_time.total_seconds() >= incubation_duration * 3600
+
+            if incubation_completed:
+                device.is_on = False  # Desligar o dispositivo
+                device.last_completion_data = datetime.now(timezone.utc)
 
         device.save()
+
         return UpdateIncubatorDevice(incubator_device=device)
