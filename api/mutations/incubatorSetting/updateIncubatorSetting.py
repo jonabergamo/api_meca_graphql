@@ -9,7 +9,7 @@ class UpdateIncubatorSetting(graphene.Mutation):
         name = graphene.String()
         temperature = graphene.Float()
         humidity = graphene.Float()
-        incubation_duration = graphene.Int()  # Número de dias como inteiro
+        incubation_duration = graphene.Float()  # Número de dias como inteiro
 
     # O tipo de retorno da mutação
     incubator_setting = graphene.Field(IncubatorSettingType)
