@@ -32,6 +32,8 @@ class UpdateIncubatorDevice(graphene.Mutation):
         if current_setting_id is not None:
             device.current_setting = IncubatorSetting.objects.get(pk=current_setting_id)
         if is_on is not None:
+            if is_on == False and device.start_time and device.current_setting:
+                device.last_completion_data = datetime.now(timezone.utc)
             device.is_on = is_on
         if humidity_sensor is not None:
             device.humidity_sensor = humidity_sensor
